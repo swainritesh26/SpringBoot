@@ -3,6 +3,7 @@ package com.springlearning.product.service;
 import com.springlearning.product.dto.ProductDTO;
 import com.springlearning.product.entity.Category;
 import com.springlearning.product.entity.Product;
+import com.springlearning.product.exception.CategoryNotFoundException;
 import com.springlearning.product.mapper.ProductMapper;
 import com.springlearning.product.repository.CategoryRepository;
 import com.springlearning.product.repository.ProductRepository;
@@ -22,7 +23,9 @@ public class ProductService {
     //create Products
     public ProductDTO createProduct(ProductDTO productDTO){
         Category category = categoryRepository.findById(productDTO.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category Not Found!"));
+                .orElseThrow(() -> new CategoryNotFoundException("Category id: "
+                        + productDTO.getCategoryId() + " Not Found!"));
+
         //DTO to Entity
         Product product = ProductMapper.toProductEntity(productDTO,category);
         product = productRepository.save(product);

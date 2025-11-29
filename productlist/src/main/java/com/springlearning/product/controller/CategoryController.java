@@ -1,6 +1,7 @@
 package com.springlearning.product.controller;
 
 import com.springlearning.product.dto.CategoryDTO;
+import com.springlearning.product.exception.CategoryAlreadyExistsException;
 import com.springlearning.product.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,13 @@ public class CategoryController {
 
     //create categories
     @PostMapping
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO){
+    public ResponseEntity<?> createCategory(@RequestBody CategoryDTO categoryDTO){
+//        try {
+//            CategoryDTO savedCategory = categoryService.createCategory(categoryDTO);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
+//        } catch (CategoryAlreadyExistsException exception){
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
+//        }
         return new ResponseEntity<>(categoryService.createCategory(categoryDTO), HttpStatus.CREATED);
     }
 
