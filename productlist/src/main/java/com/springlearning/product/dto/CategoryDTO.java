@@ -1,11 +1,16 @@
 package com.springlearning.product.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Schema(
+        name = "Category",
+        description = "It holds Category information along with their products"
+)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
